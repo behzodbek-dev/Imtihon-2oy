@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Books</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo-and-saveBook-box">
+        <img src="./images/hand-keep-book-read-source-600nw-1127076767.webp" alt="book-shop-logo" class="logo">
+        <p class="saveBook-satatus js-saveBook-status"></p>
+      </div>
+    </div>
+  </header>
+  <template class="js-book-temp">
+    <li class="book-item js-book-item">
+      <img src="./images/a-Dolls-house.jpg" alt="book-img" class="book-img js-book-img" width="80%"
+        style="height: 27rem;">
+      <h2 class="js-book-title">Dante Alighieri</h2>
+      <div class="book-year-page-lang-box d-flex" style="width: 68%; margin-inline: auto;">
+        <div class="book-year-box d-flex">
+          <img src="./icons/year.svg" alt="book-year-icon" class="book-shop-icon">
+          <p class="js-book-year">1958</p>
+        </div>
+        <div class="book-page-box d-flex">
+          <img src="./icons/pages.svg" alt="book-pages-icon" class="book-shop-icon">
+          <p class="js-book-pages">208</p>
+        </div>
+        <div class="book-lang-box d-flex">
+          <img src="./icons/language.svg" alt="book-lang-icon" class="book-shop-icon">
+          <p class="js-book-lang">English</p>
+        </div>
+      </div>
+      <div class="book-author-box d-flex" style="width: 58%; margin-inline: auto;">
+        <img src="./icons/author.svg" alt="book-author-icon" class="book-shop-icon">
+        <h3 class="book-author js-book-author">Nikola Tesla Albert</h3>
+      </div>
+      <div class="book-about-save-box d-flex" style="width: 65%; margin-inline: auto;">
+        <div class="book-about-box d-flex">
+          <img src="./icons/wiki-logo.svg" alt="book-about-icon" class="book-shop-icon">
+          <a href="#" target="blank" class="js-book-about-link">Book About</a>
+        </div>
+        <button class="js-save-book-btn">Save Book</button>
+      </div>
+    </li>
+  </template>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 class="save-book-title">Save Book</h1>
+        <ul class="js-save-book-list d-flex" style="overflow-y: scroll; border: 1px solid black; height: 50rem;"></ul>
+        <form class="books-search js-book-search-form">
+          <input type="text" class="search-books js-book-search-input" placeholder="Book or Author name">
+          <input type="text" class="search-books js-book-min-year-input" placeholder="Min Year">
+          <input type="text" class="search-books js-book-max-year-input" placeholder="Max Year">
+          <select class="search-books js-book-sort-select">
+            <option value="all" selected disabled hidden>Sort Book</option>
+            <option value="a-z">A-Z</option>
+            <option value="z-a">Z-A</option>
+            <option value="min-page">Min Page</option>
+            <option value="max-page">Max Page</option>
+            <option value="old-year">Old Year</option>
+            <option value="new-year">New Year</option>
+          </select>
+          <select class="search-books js-book-contry-sort-select ">
+            <option value="all" selected disabled hidden>Sort Contry</option>
+          </select>
+          <button class="search-books-btn">Search</button>
+        </form>
+        <ul class="book-list js-book-list d-flex"></ul>
+      </div>
+    </section>
+  </main>
+
+
+  <script src="./js/books.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
