@@ -17,23 +17,26 @@ books = books.map((item, idx) => {
 let store = window.localStorage.getItem("saveBook") ? JSON.parse(window.localStorage.getItem("saveBook")) : [];
 
 const count = (arr) => {
+    if(!(arr.length)) return elSavedBookCount.textContent = 'No saved books';
     return elSavedBookCount.textContent = `Saved books : ${arr.length}`;
 };
 
-const handleRenderBooks = (arr, {savedList, bookList}) => {
+const handleRenderBooks = (arr, {savedList, bookList}, regex = '') => {
     if(savedList && !bookList) elSavedBookList.innerHTML = '';
     if(!savedList && bookList) elBookList.innerHTML = '';
     const docFragment = document.createDocumentFragment();
     arr.forEach(book => {
         let clone = elBookTemp.cloneNode(true);
-        clone.querySelector(".js-book-img").src = book?.imageLink;
-        clone.querySelector(".js-book-title").textContent = book?.title;
-        clone.querySelector(".js-book-year").textContent = book?.year;
-        clone.querySelector(".js-book-pages").textContent = book?.pages;
-        clone.querySelector(".js-book-lang").textContent = book?.country;
-        clone.querySelector(".js-book-author").textContent = book?.author;
-        clone.querySelector(".js-book-about-link").href = book?.link;
-        let btn = clone.querySelector(".js-save-book-btn").dataset.id = book?.id;
+        clone.querySelector(".js-book-img").src = book.imageLink;
+        if(regex && regex != "(?:)") clone.querySelector(".js-book-title").innerHTML = book.title.replaceAll(regex, match => `<mark>${match}</mark>`)
+        else clone.querySelector(".js-book-title").textContent = book.title;
+        clone.querySelector(".js-book-year").textContent = book.year;
+        clone.querySelector(".js-book-pages").textContent = book.pages;
+        clone.querySelector(".js-book-lang").textContent = book.language;
+        if(regex && regex != '(?:)') clone.querySelector(".js-book-author").innerHTML = book.author.replaceAll(regex, match => `<mark>${match}</mark>`)
+        else clone.querySelector(".js-book-author").textContent = book.author;
+        clone.querySelector(".js-book-about-link").href = book.link;
+        let btn = clone.querySelector(".js-save-book-btn").dataset.id = book.id;
         docFragment.append(clone);
     });
     if(savedList && !bookList) elSavedBookList.append(docFragment);
@@ -143,7 +146,7 @@ elForm.addEventListener("submit", (evt) => {
         books.sort(sortObj[elSortBooks.value]);
     };
     const result = handleSearchBooks(regex, searchValue);
-    handleRenderBooks(result, {savedList: false, bookList: true});
+    handleRenderBooks(result, {savedList: false, bookList: true}, regex);
 });
 handleSortBooksCountry(books);
 elBookList.addEventListener("click", saveFn);
